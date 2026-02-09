@@ -2,9 +2,14 @@
 Code to search and fill the Book Request form for the ILLiad webpages that uses the Google Books API. It fills out the citation information. It also checks for any indication that the ISBN might be an ebook and displays a message.
 
 ## Directions
-- Add the book_lookup.js to your js folder.
+- Add the book_lookup.js to your js folder. Edit the ebook and error messages, if desired.
 - Adjust your LoanRequest.html page.
 - Adjust any css.
+
+### book_lookup.js
+- The ebook messages are in lines 47 and 107. 
+- The error message when no ISBN match is returned is in line 114.
+- The error message when the function doesn't work is in line 122.
 
 ### LoanRequest.html Changes
 In the <head> section, add the following call to the script.
