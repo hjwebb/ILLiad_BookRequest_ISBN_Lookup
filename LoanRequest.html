@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+	<title>Book or Media Request | ILLiad | Upstate Health Sciences Library</title>
+	<#INCLUDE filename="include_head.html">
+	<script type="text/javascript" src="js/book_lookup.js" ></script>
+</head>
+
+<body>
+    <#INCLUDE filename="include_header.html">
+    <#INCLUDE filename="include_menu.html">  
+ 
+ 
+	<div class="container">
+		<main id="content" aria-label="Content">
+			<form action="illiad.dll" method="post" name="LoanRequest">
+				<input type="hidden" name="ILLiadForm" value="LoanRequest">
+				<input type="hidden" name="ESPNumber" value="<#PARAM name='ESPNumber'>">
+				<input type="hidden" name="CallNumber" value="<#PARAM name='CallNumber'>">
+				<input type="hidden" name="NotWantedAfter" value="<#PARAM name='NotWantedAfter'>">
+				
+				<input type="hidden" name="DOI" value="<#PARAM name='DOI'>">
+				<input type="hidden" name="PMID" value="<#PARAM name='PMID'>">
+				
+				<fieldset>
+
+					<legend><h2 class="page-header">Book or Media Request</h2></legend>
+					
+					
+					<section name="bookrequest-info">
+						
+						<div class="form-group col-md-9">
+							<label for="ISSN">
+								<span class="field">
+									<span class="<#ERROR name='ERRORISSN'>">
+										ISBN (International Standard Book Number)
+										<div class="tooltip">
+										<span aria-hidden="true" class="fas fa-info-circle mr-1"></span><span class="tooltiptext">This ISBN resolver will search the Google API and complete the citation information on this book request form. If you have already imported the citation from a database or Primo search, there is no need to look up the citation again. </span>
+										</div>
+									</span>
+								</span>
+							</label>
+							<input type="text" class="form-control" name="ISSN" id="ISSN" value="<#PARAM name='ISSN'>">
+							
+						<button type="button" id="isbnSearchBtn" class="btn btn-primary btn-md c-doi">Lookup Citation Information by ISBN</button>
+						<div id="isbnError"> </div>
+						<div id="ebookmessage"></div> 
+						</div>
+						
+						
+						<div class="form-group col-md-9">
+							<label for="LoanTitle">
+								<span class="field">
+									<span class="<#ERROR name='ERRORLoanTitle'>">
+										Title
+										<span class="req">(required)</span>
+									</span>
+								</span>
+							</label>
+							<input type="text" class="form-control" name="LoanTitle" id="LoanTitle" value="<#PARAM name='LoanTitle'>" required>
+						</div>
+						
+						<div class="form-group col-md-9">  
+							<label for="LoanAuthor">
+								<span class="field">
+									<span class="<#ERROR name='ERRORLoanAuthor'>">
+										Author/Editors
+										<span class="req">(required)</span>
+									</span>
+								</span>
+							</label>
+							<input type="text" class="form-control" name="LoanAuthor" id="LoanAuthor" value="<#PARAM name='LoanAuthor'>" required>
+						</div>
+						
+						<div class="form-group col-md-9">
+							<label for="LoanPublisher">
+								<span class="field">
+									<span class="<#ERROR name='ERRORLoanPublisher'>">
+										Publisher
+									</span>
+								</span>
+							</label>
+							<input type="text" class="form-control" name="LoanPublisher" id="LoanPublisher" value="<#PARAM name='LoanPublisher'>">
+						</div>
+						
+						<div class="form-group col-md-9">
+							<label for="LoanPlace">
+								<span class="field">
+									<span class="<#ERROR name='ERRORLoanPlace'>">
+										Place of Publication
+									</span>
+								</span>
+							</label>
+							<input type="text" class="form-control" name="LoanPlace" id="LoanPlace" value="<#PARAM name='LoanPlace'>">
+						</div>
+						
+						<div class="form-group col-md-9">
+							<label for="LoanDate">
+								<span class="field">
+									<span class="<#ERROR name='ERRORLoanDate'>">
+										Date of Publication
+									</span>
+								</span>
+							</label>
+							<input type="text" class="form-control" name="LoanDate" id="LoanDate" value="<#PARAM name='LoanDate'>">
+						</div>
+					
+						<div class="form-group col-md-9">
+							<label for="LoanEdition">
+								<span class="field">
+									<span class="<#ERROR name='ERRORLoanEdition'>">
+										Edition
+									</span>
+								</span>
+							</label>
+							<input type="text" class="form-control" name="LoanEdition" id="LoanEdition" value="<#PARAM name='LoanEdition'>">
+						</div>
+						
+						
+						
+						<!--<div class="form-group col-md-9">
+							<label for="CallNumber">					
+								<span class="field">
+									<span class="<#ERROR name='ERRORCallNumber'>">
+										Call Number
+									</span>
+								</span>
+							</label>
+							<input type="text" class="form-control" name="CallNumber" id="CallNumber" value="<#PARAM name='CallNumber'>">
+						</div>
+						
+						<div class="form-group col-md-9">
+							<label for="ESPNumber">
+								<span class="field">
+									<span class="<#ERROR name='ERRORESPNumber'>">
+										OCLC or Docline UI Number
+									</span>
+								</span>
+							</label>
+							<input type="text" class="form-control" name="ESPNumber" id="ESPNumber" value="<#PARAM name='ESPNumber'>">
+						</div>-->
+							
+						<div class="form-group col-md-9">
+							<label for="AcceptAlternateEdition">
+								<span class="field">
+									<span class="<#ERROR name='ERRORAcceptAlternateEdition'>">
+										Will you accept an alternate edition of this item?
+									</span>
+								</span>
+							</label>
+							<select id="AcceptAlternateEdition" name="AcceptAlternateEdition" size="1" class="custom-select mr-sm-2"  data-persistedValue="<#PARAM name='AcceptAlternateEdition'>">
+								<option value="Yes">Yes</option>
+								<option value="No">No</option>
+							</select>
+						</div>
+	<!-- added non-english, 2/22/2023 hw -->						
+						<div class="form-group col-md-9">	
+						<label for="AcceptNonEnglish">
+								<span class="field">
+									<span class="<#ERROR name="ERRORAcceptNonEnglish">">Will you accept the item in a language other than English?</span><br />
+									<span class="small-notes">If yes, specify acceptable languages in the notes field.</span>
+								</span>
+								</label>
+								<select id="AcceptNonEnglish" name="AcceptNonEnglish" size="1" class="custom-select mr-sm-2" 
+									data-persistedValue="<#PARAM name='AcceptNonEnglish'>">
+									<option>No</option>
+									<option>Yes</option>
+								</select>
+													
+						</div>	
+							
+							
+						<div class="form-group col-md-9">
+							<label for="Notes">
+								<span class="field">
+									<span class="<#ERROR name='ERRORNotes'>">  
+										Notes   
+									</span><br>
+									<span class="small-notes">Put any information here that may help us find the item, as well as any other pertinent information.</span>
+								</span>
+							</label>
+							<textarea id="Notes" name="Notes" rows="2" cols="40" class="form-control"><#PARAM name='Notes'></textarea><br>
+						</div>	
+					</section>
+					<#INCLUDE filename='include_request_cited.html'>  
+					<#INCLUDE filename='include_request_buttons.html'>
+				</fieldset>
+				<p>All Interlibrary Loan book/media requests are presumed to be for physical materials. Typically, physical books and other items arrive at the library within one to two weeks after you place your request although some may take longer.</p>
+				<p>If only a digital format is wanted, please make a note on your request. eBooks are not often available via Interlibrary Loan, but we will explore these options.</p>
+			</form>
+		</main>
+		<#INCLUDE filename='include_footer.html'>
+	</div> 
+
+	
+</body>
+</html>
+
